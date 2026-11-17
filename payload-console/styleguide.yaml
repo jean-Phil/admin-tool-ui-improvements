@@ -1,0 +1,32 @@
+schema: styleguide.manifest/1
+name: payload-console
+request: "A small form mock, rung one: an h3-delimited payload section — a JSON payload editor with numbered lines (three-property object) and an alternate dropdown with two options; a Reset | Save | Cancel button group; a save-request feedback line beneath; then a trigger-readiness block with red x / green check marks per condition and a Trigger button disabled while any condition is unmet. Simple HTML page."
+date: 2026-11-16
+rung: static-page
+derivedFrom:
+  - path: tailwindcss-application-ui-v4/html/forms/action-panels/07-simple-well.html
+    note: the h3-delimited section well
+  - path: tailwindcss-application-ui-v4/html/elements/button-groups/01-basic.html
+    note: the joined Reset | Save | Cancel group
+  - path: tailwindcss-application-ui-v4/html/feedback/alerts/01-with-description.html
+    note: "status rows: currentColor icon + text; the marks"
+  - path: index/primitives-named.md
+    note: Container, Title, FieldLabel, FieldHint, BodyText, TextInput (-> the native select), PrimaryButton, FormStack
+tokens:
+  --color-surface: oklch(0.968 0.005 95)
+  --color-surface-raised: oklch(0.995 0.003 95)
+  --color-title: oklch(0.26 0.02 60)
+  --color-body: oklch(0.43 0.02 60)
+  --color-muted: oklch(0.57 0.015 60)
+  --color-line: oklch(0.88 0.01 60)
+  --color-accent: oklch(0.45 0.1 250)
+  --color-accent-hover: oklch(0.4 0.1 250)
+  --color-accent-contrast: oklch(0.985 0.003 95)
+  --color-success: oklch(0.55 0.13 150)
+  --color-danger: oklch(0.55 0.19 25)
+  --color-danger-hover: oklch(0.5 0.19 25)
+  --color-danger-contrast: oklch(0.985 0.005 25)
+  --color-editor: oklch(0.955 0.006 250)
+  --font-sans: ui-sans-serif, system-ui, sans-serif
+  --font-mono: ui-monospace, SFMono-Regular, monospace
+

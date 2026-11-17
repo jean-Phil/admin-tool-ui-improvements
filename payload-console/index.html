@@ -1,0 +1,184 @@
+<!doctype html>
+<!-- rung one: a static page — no JS, no config file [S-045 (2), (3)].
+     Derived from the base components (Container · Title · BodyText ·
+     FieldLabel · FieldHint · TextInput → the native select · PrimaryButton ·
+     FormStack), house tokens via theme.css. The brief's behaviours are shown
+     as static states, amended 2026-11-17 (operator direction, journalled):
+     each readiness footer is a full-width flex row, space-between — the
+     state-true Trigger on the left, the red Recompute payload (danger,
+     enabled) on the right; the console then repeats ALL CLEAR — every
+     condition green, Trigger enabled. Hydration is rung two's, never
+     ambient [TWP-S-4].
+     derived from (corpus/tailwindplus/):
+     tailwindcss-application-ui-v4/html/forms/action-panels/07-simple-well.html — the h3-delimited section well
+     tailwindcss-application-ui-v4/html/elements/button-groups/01-basic.html — the joined Reset | Save | Cancel group
+     tailwindcss-application-ui-v4/html/feedback/alerts/01-with-description.html — status rows: currentColor icon + text
+     index/primitives-named.md — the text roles and control skeletons
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>payload-console</title>
+		<link rel="stylesheet" href="./theme.css" />
+	</head>
+	<body class="bg-surface font-sans text-body antialiased">
+		<main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+			<h1 class="font-semibold text-title text-2xl">Relay console</h1>
+			<p class="mt-1 text-sm">Edit the dispatch payload, then trigger once every readiness condition is met.</p>
+
+			<!-- the payload section: the well shell, delimited by its h3 -->
+			<section class="mt-8 rounded-lg bg-surface-raised inset-ring-1 inset-ring-line">
+				<div class="px-4 py-5 sm:p-6">
+					<h3 class="text-base font-semibold text-title">Payload</h3>
+					<div class="mt-4 space-y-5">
+						<div>
+							<label for="payload-editor" class="block font-medium text-title text-sm">Request payload</label>
+							<div id="payload-editor" class="mt-2 rounded-md bg-editor inset-ring-1 inset-ring-line p-4 font-mono text-sm" aria-label="JSON payload editor, five lines">
+								<div class="flex">
+									<span class="w-7 shrink-0 select-none text-right tabular-nums text-muted">1</span>
+									<code class="ml-3 whitespace-pre text-title">{</code>
+								</div>
+								<div class="flex">
+									<span class="w-7 shrink-0 select-none text-right tabular-nums text-muted">2</span>
+									<code class="ml-3 whitespace-pre"><span class="text-title">&quot;endpoint&quot;</span><span class="text-muted">:</span> <span class="text-accent">&quot;/api/v1/relay/dispatch&quot;</span><span class="text-muted">,</span></code>
+								</div>
+								<div class="flex">
+									<span class="w-7 shrink-0 select-none text-right tabular-nums text-muted">3</span>
+									<code class="ml-3 whitespace-pre"><span class="text-title">&quot;retries&quot;</span><span class="text-muted">:</span> <span class="text-body">3</span><span class="text-muted">,</span></code>
+								</div>
+								<div class="flex">
+									<span class="w-7 shrink-0 select-none text-right tabular-nums text-muted">4</span>
+									<code class="ml-3 whitespace-pre"><span class="text-title">&quot;timeoutMs&quot;</span><span class="text-muted">:</span> <span class="text-body">8000</span></code>
+								</div>
+								<div class="flex">
+									<span class="w-7 shrink-0 select-none text-right tabular-nums text-muted">5</span>
+									<code class="ml-3 whitespace-pre text-title">}</code>
+								</div>
+							</div>
+						</div>
+						<div>
+							<label for="payload-target" class="block font-medium text-title text-sm">Target</label>
+							<div class="relative mt-2">
+								<select id="payload-target" name="target" class="block w-full appearance-none rounded-md bg-surface-raised px-3 py-1.5 pr-9 text-base text-title outline-1 -outline-offset-1 outline-line focus:outline-2 focus:-outline-offset-2 focus:outline-accent sm:text-sm/6">
+									<option value="staging" selected>Staging relay</option>
+									<option value="production">Production relay</option>
+								</select>
+								<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="pointer-events-none absolute top-2.5 right-3 size-5 text-muted">
+									<path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+								</svg>
+							</div>
+						</div>
+					</div>
+
+					<!-- the joined group: Reset | Save | Cancel -->
+					<div class="mt-6">
+						<span class="isolate inline-flex rounded-md shadow-xs">
+							<button type="button" class="relative inline-flex items-center rounded-l-md bg-surface-raised px-3 py-2 text-sm font-semibold text-title inset-ring-1 inset-ring-line hover:bg-surface focus:z-10">Reset</button>
+							<button type="button" class="relative -ml-px inline-flex items-center bg-accent px-3 py-2 text-sm font-semibold text-accent-contrast hover:bg-accent-hover focus:z-10">Save</button>
+							<button type="button" class="relative -ml-px inline-flex items-center rounded-r-md bg-surface-raised px-3 py-2 text-sm font-semibold text-title inset-ring-1 inset-ring-line hover:bg-surface focus:z-10">Cancel</button>
+						</span>
+					</div>
+
+					<!-- the save-request feedback line, carrying its success sample -->
+					<p class="mt-3 text-sm text-muted" aria-live="polite">
+						<span class="font-medium text-success" role="img" aria-label="saved">✓</span>
+						Payload saved · 200 OK · just now
+					</p>
+				</div>
+			</section>
+
+			<!-- the readiness block, as delivered: one row per condition, the red x unmet -->
+			<section class="mt-6 rounded-lg bg-surface-raised inset-ring-1 inset-ring-line">
+				<div class="px-4 py-5 sm:p-6">
+					<h3 class="text-base font-semibold text-title">Trigger readiness</h3>
+					<ul class="mt-4 space-y-3">
+						<li class="flex items-start gap-x-3">
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-success">
+								<path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+							<div class="text-sm">
+								<p class="font-medium text-title">Payload parses as JSON</p>
+								<p class="text-muted">Three properties, no syntax errors.</p>
+							</div>
+						</li>
+						<li class="flex items-start gap-x-3">
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-success">
+								<path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+							<div class="text-sm">
+								<p class="font-medium text-title">Target selected</p>
+								<p class="text-muted">Dispatch goes to the staging relay.</p>
+							</div>
+						</li>
+						<li class="flex items-start gap-x-3">
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-danger">
+								<path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+							<div class="text-sm">
+								<p class="font-medium text-title">Rate budget confirmed</p>
+								<p class="text-muted">Confirm the dispatch budget before triggering.</p>
+							</div>
+						</li>
+					</ul>
+					<!-- the footer row: full-width flex, space-between — Trigger (disabled, state-true) left, Recompute payload (danger, enabled) right -->
+					<div class="mt-5 flex items-center justify-between">
+						<button type="button" disabled class="inline-flex items-center rounded-md bg-accent px-3 py-2 text-sm/6 font-semibold text-accent-contrast shadow-xs hover:bg-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-40">
+							Trigger
+						</button>
+						<button type="button" class="inline-flex items-center rounded-md bg-danger px-3 py-2 text-sm/6 font-semibold text-danger-contrast shadow-xs hover:bg-danger-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-danger">
+							Recompute payload
+						</button>
+					</div>
+					<p class="mt-2 text-sm text-muted">Trigger stays disabled while a condition is unmet; Recompute payload re-runs the check.</p>
+				</div>
+			</section>
+
+			<!-- the readiness block, ALL CLEAR: every condition met, Trigger enabled — the amended repeat -->
+			<section class="mt-6 rounded-lg bg-surface-raised inset-ring-1 inset-ring-line">
+				<div class="px-4 py-5 sm:p-6">
+					<h3 class="text-base font-semibold text-title">Trigger readiness</h3>
+					<ul class="mt-4 space-y-3">
+						<li class="flex items-start gap-x-3">
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-success">
+								<path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+							<div class="text-sm">
+								<p class="font-medium text-title">Payload parses as JSON</p>
+								<p class="text-muted">Three properties, no syntax errors.</p>
+							</div>
+						</li>
+						<li class="flex items-start gap-x-3">
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-success">
+								<path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+							<div class="text-sm">
+								<p class="font-medium text-title">Target selected</p>
+								<p class="text-muted">Dispatch goes to the staging relay.</p>
+							</div>
+						</li>
+						<li class="flex items-start gap-x-3">
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-success">
+								<path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+							<div class="text-sm">
+								<p class="font-medium text-title">Rate budget confirmed</p>
+								<p class="text-muted">Budget confirmed for the staging relay.</p>
+							</div>
+						</li>
+					</ul>
+					<!-- the footer row, all clear: both actions enabled -->
+					<div class="mt-5 flex items-center justify-between">
+						<button type="button" class="inline-flex items-center rounded-md bg-accent px-3 py-2 text-sm/6 font-semibold text-accent-contrast shadow-xs hover:bg-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">
+							Trigger
+						</button>
+						<button type="button" class="inline-flex items-center rounded-md bg-danger px-3 py-2 text-sm/6 font-semibold text-danger-contrast shadow-xs hover:bg-danger-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-danger">
+							Recompute payload
+						</button>
+					</div>
+					<p class="mt-2 text-sm text-muted">All conditions met — ready to trigger; Recompute payload re-runs the check.</p>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
