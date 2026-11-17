@@ -1,0 +1,34 @@
+schema: styleguide.manifest/1
+name: subscriptions-table
+request: "Subscriptions ledger, rung one: a nine-column table — Subscription number, Status, Term start date, Term end date, Sub start date, Object id, Object name, Qty, Price — every column text-centered; the three date columns and the subscription-number column medium width, object id and object name the widest (they can display up to 32 characters), qty and price small; subscription numbers are links shown as such; status is Active or Cancelled; tight rows, horizontal borders only, striped rows. Simple HTML page."
+date: 2026-11-17
+rung: static-page
+derivedFrom:
+  - path: tailwindcss-application-ui-v4/html/lists/tables/05-with-striped-rows.html
+    note: the striped table — divide-y rule under the header, even-row stripes, horizontal borders only
+  - path: tailwindcss-application-ui-v4/html/lists/tables/12-with-condensed-content.html
+    note: the condensed table — px-2 py-2 tight cell paddings
+  - path: tailwindcss-application-ui-v4/html/lists/tables/06-with-uppercase-headings.html
+    note: compact uppercase muted column headers
+  - path: tailwindcss-application-ui-v4/html/lists/tables/09-with-avatars-and-multiline-content.html
+    note: the status badge (pill, inset ring) for Active/Cancelled values
+  - path: index/primitives-named.md
+    note: Container, ActionLink (the subscription-number link), Badge skeleton, TableCell paddings, text roles
+  - path: tailwindcss-application-ui-v4/html/lists/tables/17-with-checkboxes.html
+    note: table-fixed with width classes on the header cells; the selected-row edge strip (absolute inset-y-0 left-0 w-0.5) — statically present as the cancelled rows’ danger marker
+  - path: tailwindcss-application-ui-v4/html/lists/tables/16-with-border.html
+    note: the disabled-state opacity idiom (disabled:opacity-30 on inactive controls) — applied at row level as opacity-60 for the faded cancelled rows
+tokens:
+  --color-surface: oklch(0.968 0.005 95)
+  --color-surface-raised: oklch(0.995 0.003 95)
+  --color-title: oklch(0.26 0.02 60)
+  --color-body: oklch(0.43 0.02 60)
+  --color-muted: oklch(0.57 0.015 60)
+  --color-line: oklch(0.88 0.01 60)
+  --color-accent: oklch(0.45 0.1 250)
+  --color-accent-hover: oklch(0.4 0.1 250)
+  --color-success: oklch(0.55 0.13 150)
+  --color-danger: oklch(0.55 0.19 25)
+  --font-sans: ui-sans-serif, system-ui, sans-serif
+  --font-mono: ui-monospace, SFMono-Regular, monospace
+

@@ -1,0 +1,153 @@
+<!doctype html>
+<!-- rung one: a static page — no JS, no config file [S-045 (2), (3)].
+     A nine-column subscriptions ledger, every column text-centered, tight
+     rows (px-2 py-2), horizontal rules only (divide-y under the header and
+     between rows — no verticals). No stripes: the row background carries the
+     status — active rows on the raised tone, cancelled rows sunk to the page
+     tone (bg-surface). Cancelled content ghosts at opacity-40 — the corpus's
+     disabled-state idiom (uniform opacity on inactive content) applied at
+     cell level, so the row's status ground stays solid — while the two
+     signals that speak for the state stay crisp: the danger edge strip
+     (17's selected-row indicator, statically present) and the Cancelled
+     badge. Widths ride a table-fixed governance: dates and the subscription
+     number medium (w-28/w-32), object id and name the widest (w-64, sized to
+     carry 32 characters on one line), qty and price small (w-14/w-20).
+     Subscription numbers are ActionLinks (accent, hover); the status column
+     is the tailwindplus status badge — Active in the success tone, Cancelled
+     quiet gray. House tokens via theme.css.
+     derived from (corpus/tailwindplus/):
+    tailwindcss-application-ui-v4/html/lists/tables/05-with-striped-rows.html — the table skeleton — divide-y rule under the header, horizontal borders only (stripes retired at the operator's direction)
+    tailwindcss-application-ui-v4/html/lists/tables/12-with-condensed-content.html — the condensed table — px-2 py-2 tight cell paddings
+    tailwindcss-application-ui-v4/html/lists/tables/06-with-uppercase-headings.html — compact muted column headers (scale only — the brief's labels render as written, no case transform)
+    tailwindcss-application-ui-v4/html/lists/tables/09-with-avatars-and-multiline-content.html — the status badge (pill, inset ring) for Active/Cancelled values
+    tailwindcss-application-ui-v4/html/lists/tables/17-with-checkboxes.html — table-fixed with width classes on the header cells; the selected-row edge strip (absolute inset-y-0 left-0 w-0.5) — statically present as the cancelled rows' danger marker
+    tailwindcss-application-ui-v4/html/lists/tables/16-with-border.html — the disabled-state opacity idiom (disabled:opacity-30 on inactive controls) — applied at cell level as opacity-40 for the ghosted cancelled content
+    index/primitives-named.md — Container, ActionLink (the subscription-number link), Badge skeleton, TableCell paddings, text roles
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>subscriptions-table</title>
+		<link rel="stylesheet" href="./theme.css" />
+	</head>
+	<body class="bg-surface font-sans text-body antialiased">
+		<main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+			<h1 class="font-semibold text-title text-2xl">Subscriptions</h1>
+			<p class="mt-1 text-sm">Every subscription on the account — active rows raised, cancelled rows sunk and ghosted, horizontal rules only.</p>
+
+			<!-- the ledger: table-fixed (widths on the header cells), divide-y
+			     under the header and between rows; the row ground carries the
+			     status — raised for active, sunk for cancelled -->
+			<div class="mt-8 overflow-x-auto">
+				<table class="table-fixed min-w-full divide-y divide-line">
+					<thead>
+						<tr>
+							<th scope="col" class="w-32 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Subscription number</th>
+							<th scope="col" class="w-24 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Status</th>
+							<th scope="col" class="w-28 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Term start date</th>
+							<th scope="col" class="w-28 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Term end date</th>
+							<th scope="col" class="w-28 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Sub start date</th>
+							<th scope="col" class="w-64 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Object id</th>
+							<th scope="col" class="w-64 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Object name</th>
+							<th scope="col" class="w-14 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Qty</th>
+							<th scope="col" class="w-20 px-2 py-2 text-center text-xs font-medium tracking-wide text-muted whitespace-nowrap">Price</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-line bg-surface-raised">
+						<tr>
+							<td class="px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><a href="#" class="font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00412</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success inset-ring inset-ring-success/25">Active</span></td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-01-01</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-12-31</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-01-01</td>
+							<td class="px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">a3f5c9e21b7d4f6a8c0e2b4d6f8a0c2e</td>
+							<td class="px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Acme Industries · Pro annual</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">12</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$5,880.00</td>
+						</tr>
+						<!-- cancelled: sunk to the page tone; content ghosts at 40 except
+						     the danger strip and the badge, which stay crisp -->
+						<tr class="bg-surface">
+							<td class="relative px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><div class="absolute inset-y-0 left-0 w-0.5 bg-danger"></div><a href="#" class="opacity-40 font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00398</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-surface-raised px-2 py-1 text-xs font-medium text-body inset-ring inset-ring-line">Cancelled</span></td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-03-01</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-02-28</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-03-01</td>
+							<td class="opacity-40 px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">7b2d1e9f4a6c8e0b2d4f6a8c0e2b4d6f</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Globex Corp — Team monthly</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">25</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$1,250.00</td>
+						</tr>
+						<tr>
+							<td class="px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><a href="#" class="font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00371</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success inset-ring inset-ring-success/25">Active</span></td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-02-15</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2027-02-14</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-02-15</td>
+							<td class="px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">1c8e4a2f6b9d0e3c5a7b9d1f3e5c7a9b</td>
+							<td class="px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Initech LLC · Enterprise</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">3</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$1,740.00</td>
+						</tr>
+						<tr>
+							<td class="px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><a href="#" class="font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00355</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success inset-ring inset-ring-success/25">Active</span></td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-11-01</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-10-31</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-11-01</td>
+							<td class="px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">9d2b6f8a4c0e2b4d6f8a0c2e4b6d8f0a</td>
+							<td class="px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Stark Industries Pro yearly</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">40</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$9,600.00</td>
+						</tr>
+						<tr class="bg-surface">
+							<td class="relative px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><div class="absolute inset-y-0 left-0 w-0.5 bg-danger"></div><a href="#" class="opacity-40 font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00340</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-surface-raised px-2 py-1 text-xs font-medium text-body inset-ring inset-ring-line">Cancelled</span></td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-08-01</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-08-31</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-08-01</td>
+							<td class="opacity-40 px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">5e7a9c1b3d5f7a9c1e3b5d7f9a1c3e5b</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Wayne Enterprises · Starter</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">8</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$760.00</td>
+						</tr>
+						<tr>
+							<td class="px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><a href="#" class="font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00322</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success inset-ring inset-ring-success/25">Active</span></td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-03-01</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2027-02-28</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-03-01</td>
+							<td class="px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">2b4d6f8a0c2e4b6d8f0a2c4e6a8b0d2f</td>
+							<td class="px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Umbrella Labs — Pro monthly</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">15</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$2,250.00</td>
+						</tr>
+						<tr>
+							<td class="px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><a href="#" class="font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00309</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success inset-ring inset-ring-success/25">Active</span></td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-04-01</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2027-03-31</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-04-01</td>
+							<td class="px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">8f0a2c4e6b8d0f2a4c6e8a0b2d4f6a8c</td>
+							<td class="px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Soylent Corp · Team yearly</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">6</td>
+							<td class="px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$900.00</td>
+						</tr>
+						<tr class="bg-surface">
+							<td class="relative px-2 py-2 text-center text-sm tabular-nums whitespace-nowrap"><div class="absolute inset-y-0 left-0 w-0.5 bg-danger"></div><a href="#" class="opacity-40 font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">SUB-2026-00287</a></td>
+							<td class="px-2 py-2 text-center text-sm"><span class="inline-flex items-center rounded-md bg-surface-raised px-2 py-1 text-xs font-medium text-body inset-ring inset-ring-line">Cancelled</span></td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-06-01</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2026-05-31</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">2025-06-01</td>
+							<td class="opacity-40 px-2 py-2 text-center font-mono text-xs text-muted whitespace-nowrap">4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-title">Hooli Ventures · Enterprise</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">22</td>
+							<td class="opacity-40 px-2 py-2 text-center text-sm tabular-nums text-muted whitespace-nowrap">$4,400.00</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</body>
+</html>
