@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- rung one: a static page — no JS, no config file [S-045 (2), (3)].
+     A bird's eye view of an account's subscriptions: seven datapoints in
+     three group cards — Discount subscriptions (Active · Cancelled ·
+     Total), Devices (a single count), Device subscriptions (Active ·
+     Cancelled · Total). Each group is a raised well with an h3 heading and
+     a dl of stats; the stat cell is the stats family's anatomy — a muted
+     dt label over a large tracking-tight dd value. Values stay monochrome:
+     state colour lives in the sibling ledger (subscriptions-table), not in
+     the overview's numbers. House tokens via theme.css.
+     derived from (corpus/tailwindplus/):
+    tailwindcss-application-ui-v4/html/data-display/stats/03-simple-in-cards.html — the card idiom — h3 group heading over a dl grid of stat cards (dt label, dd value)
+    tailwindcss-application-ui-v4/html/data-display/stats/02-simple.html — the stat cell anatomy — dt text-sm font-medium muted, dd mt-1 text-3xl font-semibold tracking-tight
+    tailwindcss-application-ui-v4/html/data-display/stats/01-with-trending.html — the stat family's baseline row rhythm (items-baseline value rows)
+    index/primitives-named.md — Container, Title, text roles
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>subscriptions-dashboard</title>
+		<link rel="stylesheet" href="./theme.css" />
+	</head>
+	<body class="bg-surface font-sans text-body antialiased">
+		<main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+			<h1 class="font-semibold text-title text-2xl">Subscriptions overview</h1>
+			<p class="mt-1 text-sm">A bird's eye view of the account's subscriptions — seven counts in three groups.</p>
+
+			<!-- the dashboard block: three group wells on the raised tone -->
+			<div class="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
+				<!-- discount subscriptions: active · cancelled · total -->
+				<section class="rounded-lg bg-surface-raised inset-ring-1 inset-ring-line">
+					<div class="px-4 py-5 sm:p-6">
+						<h3 class="text-base font-semibold text-title">Discount subscriptions</h3>
+						<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Active</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">128</dd>
+							</div>
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Cancelled</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">34</dd>
+							</div>
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Total</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">162</dd>
+							</div>
+						</dl>
+					</div>
+				</section>
+
+				<!-- devices: the single count -->
+				<section class="rounded-lg bg-surface-raised inset-ring-1 inset-ring-line">
+					<div class="px-4 py-5 sm:p-6">
+						<h3 class="text-base font-semibold text-title">Devices</h3>
+						<dl class="mt-5">
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Count</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">892</dd>
+							</div>
+						</dl>
+					</div>
+				</section>
+
+				<!-- device subscriptions: active · cancelled · total -->
+				<section class="rounded-lg bg-surface-raised inset-ring-1 inset-ring-line">
+					<div class="px-4 py-5 sm:p-6">
+						<h3 class="text-base font-semibold text-title">Device subscriptions</h3>
+						<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Active</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">247</dd>
+							</div>
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Cancelled</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">61</dd>
+							</div>
+							<div>
+								<dt class="truncate text-sm font-medium text-muted">Total</dt>
+								<dd class="mt-1 text-3xl font-semibold tracking-tight text-title tabular-nums">308</dd>
+							</div>
+						</dl>
+					</div>
+				</section>
+			</div>
+		</main>
+	</body>
+</html>

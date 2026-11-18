@@ -1,0 +1,28 @@
+schema: styleguide.manifest/1
+name: subscriptions-dashboard
+request: "Subscriptions dashboard, rung one: a dashboard block giving a bird's eye view of an account's subscriptions — seven datapoints in three groups: Discount subscriptions (Active, Cancelled, Total), Devices (a single count), Device subscriptions (Active, Cancelled, Total). Simple HTML page."
+date: 2026-11-18
+rung: static-page
+derivedFrom:
+  - path: tailwindcss-application-ui-v4/html/data-display/stats/03-simple-in-cards.html
+    note: the card idiom — h3 group heading over a dl grid of stat cards (dt label, dd value)
+  - path: tailwindcss-application-ui-v4/html/data-display/stats/02-simple.html
+    note: the stat cell anatomy — dt text-sm font-medium muted, dd mt-1 text-3xl font-semibold tracking-tight
+  - path: tailwindcss-application-ui-v4/html/data-display/stats/01-with-trending.html
+    note: the stat family's baseline row rhythm (items-baseline value rows)
+  - path: index/primitives-named.md
+    note: Container, Title, text roles
+tokens:
+  --color-surface: oklch(0.968 0.005 95)
+  --color-surface-raised: oklch(0.995 0.003 95)
+  --color-title: oklch(0.26 0.02 60)
+  --color-body: oklch(0.43 0.02 60)
+  --color-muted: oklch(0.57 0.015 60)
+  --color-line: oklch(0.88 0.01 60)
+  --color-accent: oklch(0.45 0.1 250)
+  --color-accent-hover: oklch(0.4 0.1 250)
+  --color-success: oklch(0.55 0.13 150)
+  --color-danger: oklch(0.55 0.19 25)
+  --font-sans: ui-sans-serif, system-ui, sans-serif
+  --font-mono: ui-monospace, SFMono-Regular, monospace
+
