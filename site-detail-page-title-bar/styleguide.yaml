@@ -1,0 +1,28 @@
+schema: styleguide.manifest/1
+name: site-detail-page-title-bar
+request: "Site detail page title bar: a space-between flex section — left, the page title with a small headerless table beneath it (three rows: app1, app2, category); right, a stack of two buttons, the upper one bigger — Refresh on green; the lower one much smaller — Update app2 token, neutral. The bar ships twice: one light background, one dark."
+date: 2026-11-19
+rung: static-page
+derivedFrom:
+  - path: tailwindcss-application-ui-v4/html/application-shells/stacked/03-with-lighter-page-header.html
+    note: "the lighter page-header band — the title bar's anatomy: a Container-guttered band carrying the page title, actions to the right"
+  - path: tailwindcss-application-ui-v4/html/lists/tables/12-with-condensed-content.html
+    note: the condensed table (the operator's twice-cited block) — the small headerless table's divide-y row rhythm and quiet cell roles
+  - path: index/primitives-named.md
+    note: Title, PrimaryButton, TableCell, RowFlex — the named primitives the bar composes
+tokens:
+  --color-surface: oklch(0.968 0.005 95)
+  --color-surface-raised: oklch(0.995 0.003 95)
+  --color-title: oklch(0.26 0.02 60)
+  --color-body: oklch(0.43 0.02 60)
+  --color-muted: oklch(0.57 0.015 60)
+  --color-line: oklch(0.88 0.01 60)
+  --color-accent: oklch(0.45 0.1 250)
+  --color-accent-hover: oklch(0.4 0.1 250)
+  --color-accent-contrast: oklch(0.985 0.003 95)
+  --color-success: oklch(0.55 0.13 150)
+  --color-success-hover: oklch(0.5 0.13 150)
+  --color-danger: oklch(0.55 0.19 25)
+  --font-sans: ui-sans-serif, system-ui, sans-serif
+  --font-mono: ui-monospace, SFMono-Regular, monospace
+

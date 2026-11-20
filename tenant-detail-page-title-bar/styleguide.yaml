@@ -1,0 +1,29 @@
+schema: styleguide.manifest/1
+name: tenant-detail-page-title-bar
+request: "Tenant detail page title bar — the site-detail bar's tenant sibling: one space-between flex section, three items. Left: the page title over a small headerless table (rows: app1, app2). Center: a two-column table, header row Category / Billing category, everything centered. Right: a stack of two actions — the upper one bigger, a joined button group (Refresh tenant on success green; its second segment '+ sites' on a lighter shade of green); the lower one much smaller, Update app2 token, neutral. The bar ships twice: one light background, one dark."
+date: 2026-11-19
+rung: static-page
+derivedFrom:
+  - path: tailwindcss-application-ui-v4/html/elements/button-groups/01-basic.html
+    note: the joined button group — isolate inline-flex rounded-md shadow-xs, rounded-l-md / -ml-px rounded-r-md joins — the Refresh tenant | + sites pair
+  - path: tailwindcss-application-ui-v4/html/application-shells/stacked/03-with-lighter-page-header.html
+    note: "the lighter page-header band — the title bar's anatomy: a Container-guttered band carrying the page title, actions to the right (the sibling site-detail bar's derivation)"
+  - path: index/primitives-named.md
+    note: Title, PrimaryButton, TableCell, RowFlex — the named primitives the bar composes
+tokens:
+  --color-surface: oklch(0.968 0.005 95)
+  --color-surface-raised: oklch(0.995 0.003 95)
+  --color-title: oklch(0.26 0.02 60)
+  --color-body: oklch(0.43 0.02 60)
+  --color-muted: oklch(0.57 0.015 60)
+  --color-line: oklch(0.88 0.01 60)
+  --color-accent: oklch(0.45 0.1 250)
+  --color-accent-hover: oklch(0.4 0.1 250)
+  --color-accent-contrast: oklch(0.985 0.003 95)
+  --color-success: oklch(0.55 0.13 150)
+  --color-success-hover: oklch(0.5 0.13 150)
+  --color-success-raised: oklch(0.65 0.12 150)
+  --color-danger: oklch(0.55 0.19 25)
+  --font-sans: ui-sans-serif, system-ui, sans-serif
+  --font-mono: ui-monospace, SFMono-Regular, monospace
+

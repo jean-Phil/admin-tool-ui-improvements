@@ -1,0 +1,129 @@
+<!doctype html>
+<!-- rung one: a static page — no JS, no config file [S-045 (2), (3)].
+     The tenant-detail page title bar — the site-detail bar's tenant sibling
+     (workspaces/site-detail-page-title-bar, born this session): one
+     space-between flex section, THREE items, shipped twice — a light bar and
+     a dark bar. The DARK take is again not a second markup: the scoped
+     override (.bar-dark) re-points the --color-* custom properties inside
+     that section only, so every utility re-themes itself; the greens and the
+     near-white on-button text are left untouched — they already carry on
+     dark. Left item: the page title with the small headerless table beneath
+     (rows: app1, app2 — quiet mono cells). Center item: the two-column
+     table — header row Category / Billing category, every cell centered,
+     ONE values row (amended: the operator asked for a single values row
+     aligned with the LEFT BLOCK'S BOTTOM — self-end seats the table's
+     bottom edge on the flex line the left block sets; a lone row has
+     nothing to divide, so the tbody drops divide-y). Right item: the action
+     stack — upper and bigger, the JOINED button group (Refresh tenant on
+     success green; the '+ sites' segment on the raised, lighter green — the
+     button-groups 01-basic anatomy with solid fills); lower and much
+     smaller, Update app2 token, the family neutral utility.
+     RULING: the founding brief said "three rows" for the left table but
+     supplied two strings (app1, app2); category moved to the center table's
+     header — the left table carries the two rows the strings name.
+     derived from (corpus/tailwindplus/):
+    tailwindcss-application-ui-v4/html/elements/button-groups/01-basic.html — the joined button group — isolate inline-flex rounded-md shadow-xs, rounded-l-md / -ml-px rounded-r-md joins — the Refresh tenant | + sites pair
+    tailwindcss-application-ui-v4/html/application-shells/stacked/03-with-lighter-page-header.html — the lighter page-header band — the title bar's anatomy: a Container-guttered band carrying the page title, actions to the right (the sibling site-detail bar's derivation)
+    index/primitives-named.md — Title, PrimaryButton, TableCell, RowFlex — the named primitives the bar composes
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>tenant-detail-page-title-bar</title>
+		<link rel="stylesheet" href="./theme.css" />
+	</head>
+	<body class="bg-surface font-sans text-body antialiased">
+		<main class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+			<!-- the light bar -->
+			<p class="text-xs font-semibold tracking-widest text-muted uppercase">Light</p>
+			<section aria-label="Tenant detail title bar, light" class="mt-2 flex flex-wrap items-start justify-between gap-x-6 gap-y-4 rounded-lg bg-surface-raised px-4 py-5 inset-ring-1 inset-ring-line sm:px-6">
+				<div>
+					<h1 class="font-semibold text-title text-2xl">Meridian Logistics</h1>
+					<table class="mt-2">
+						<tbody class="divide-y divide-line">
+							<tr>
+								<td class="py-1.5 pr-10 font-mono text-sm whitespace-nowrap text-muted">app1</td>
+							</tr>
+							<tr>
+								<td class="py-1.5 pr-10 font-mono text-sm whitespace-nowrap text-muted">app2</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<table class="self-end text-center">
+					<thead>
+						<tr>
+							<th scope="col" class="px-6 py-2 text-sm font-semibold text-title">Category</th>
+							<th scope="col" class="px-6 py-2 text-sm font-semibold text-title">Billing category</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="px-6 py-2 text-sm whitespace-nowrap text-body">Compute</td>
+							<td class="px-6 py-2 text-sm whitespace-nowrap text-body">Cloud services</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="flex flex-col items-end gap-2">
+					<span class="isolate inline-flex rounded-md shadow-xs">
+						<button type="button" class="relative inline-flex items-center rounded-l-md bg-success px-4 py-2 text-base font-semibold text-accent-contrast hover:bg-success-hover focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-success">
+							Refresh tenant
+						</button>
+						<button type="button" class="relative -ml-px inline-flex items-center rounded-r-md bg-success-raised px-4 py-2 text-base font-semibold text-accent-contrast hover:bg-success focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-success">
+							+ sites
+						</button>
+					</span>
+					<button type="button" class="rounded-md bg-surface px-2 py-1 text-xs font-semibold text-title inset-ring-1 inset-ring-line hover:bg-surface-raised focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">
+						Update app2 token
+					</button>
+				</div>
+			</section>
+
+			<!-- the dark bar: identical markup, the .bar-dark scope re-points the tokens -->
+			<p class="mt-12 text-xs font-semibold tracking-widest text-muted uppercase">Dark</p>
+			<section aria-label="Tenant detail title bar, dark" class="bar-dark mt-2 flex flex-wrap items-start justify-between gap-x-6 gap-y-4 rounded-lg bg-surface-raised px-4 py-5 inset-ring-1 inset-ring-line sm:px-6">
+				<div>
+					<h1 class="font-semibold text-title text-2xl">Meridian Logistics</h1>
+					<table class="mt-2">
+						<tbody class="divide-y divide-line">
+							<tr>
+								<td class="py-1.5 pr-10 font-mono text-sm whitespace-nowrap text-muted">app1</td>
+							</tr>
+							<tr>
+								<td class="py-1.5 pr-10 font-mono text-sm whitespace-nowrap text-muted">app2</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<table class="self-end text-center">
+					<thead>
+						<tr>
+							<th scope="col" class="px-6 py-2 text-sm font-semibold text-title">Category</th>
+							<th scope="col" class="px-6 py-2 text-sm font-semibold text-title">Billing category</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="px-6 py-2 text-sm whitespace-nowrap text-body">Compute</td>
+							<td class="px-6 py-2 text-sm whitespace-nowrap text-body">Cloud services</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="flex flex-col items-end gap-2">
+					<span class="isolate inline-flex rounded-md shadow-xs">
+						<button type="button" class="relative inline-flex items-center rounded-l-md bg-success px-4 py-2 text-base font-semibold text-accent-contrast hover:bg-success-hover focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-success">
+							Refresh tenant
+						</button>
+						<button type="button" class="relative -ml-px inline-flex items-center rounded-r-md bg-success-raised px-4 py-2 text-base font-semibold text-accent-contrast hover:bg-success focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-success">
+							+ sites
+						</button>
+					</span>
+					<button type="button" class="rounded-md bg-surface px-2 py-1 text-xs font-semibold text-title inset-ring-1 inset-ring-line hover:bg-surface-raised focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">
+						Update app2 token
+					</button>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

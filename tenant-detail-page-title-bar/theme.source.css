@@ -1,0 +1,46 @@
+/* theme.source.css — the @theme token surface [S-045 (3)]. No config
+ * file exists and none may: the tokens below mint the utilities. The scan is
+ * pinned, not heuristic: source(none) + the workspace's own files. The block
+ * is static so the committed sheet carries EVERY chosen token, used or not —
+ * the token palette is part of the deliverable, not just utility fodder.
+ *
+ * The COMMITTED stylesheet is built dev-time by the CLI at pinned paths
+ * [S-045 (2)] — see README.md for the exact line.
+ */
+@import "tailwindcss" source(none);
+
+@source "./index.html";
+
+@theme static {
+	--color-surface: oklch(0.968 0.005 95);
+	--color-surface-raised: oklch(0.995 0.003 95);
+	--color-title: oklch(0.26 0.02 60);
+	--color-body: oklch(0.43 0.02 60);
+	--color-muted: oklch(0.57 0.015 60);
+	--color-line: oklch(0.88 0.01 60);
+	--color-accent: oklch(0.45 0.1 250);
+	--color-accent-hover: oklch(0.4 0.1 250);
+	--color-accent-contrast: oklch(0.985 0.003 95);
+	--color-success: oklch(0.55 0.13 150);
+	--color-success-hover: oklch(0.5 0.13 150);
+	--color-success-raised: oklch(0.65 0.12 150);
+	--color-danger: oklch(0.55 0.19 25);
+	--font-sans: ui-sans-serif, system-ui, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, monospace;
+}
+
+/* The dark bar — a SCOPE, not a second markup (the sibling
+ * site-detail-page-title-bar's device): bar-dark re-points the --color-*
+ * custom properties, and every utility that resolves to var(--color-*)
+ * re-themes itself (warm hue 60 surfaces, hue 95 text — the family palette
+ * inverted). The greens, accent, danger and the on-button accent-contrast
+ * are left alone: they already carry on dark.
+ * [S-045 (4)]: a custom class routes through @utility — never a bare rule. */
+@utility bar-dark {
+	--color-surface: oklch(0.22 0.015 60);
+	--color-surface-raised: oklch(0.27 0.02 60);
+	--color-title: oklch(0.94 0.01 95);
+	--color-body: oklch(0.78 0.01 95);
+	--color-muted: oklch(0.64 0.015 95);
+	--color-line: oklch(0.38 0.02 60);
+}
